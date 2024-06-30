@@ -15,6 +15,26 @@ app.use(express.json());
 app.use(cookieParser());
 
 // User Registration
+
+app.get("/api/getAllFlights", async (req,res) => {
+    try {
+        const flights = await prisma.flight.findMany({
+            include: {
+                bookings: true
+            }
+        });
+        if (flights) {
+            return res.status(200).json(flights);
+        }
+        return res.status(400).json({
+            error: "No flights found"
+        })
+    } catch (e) {
+        return res.status(500).json({
+            error: "Internal server error"
+        })
+    }
+})
 app.post("/api/user/register", async (req, res) => {
     const { email, password } = req.body;
 
@@ -198,7 +218,14 @@ app.post("/api/user/searchFlight", async (req, res) => {
             filters.name = { contains: name, mode: 'insensitive' };
         }
         if (date) {
-            filters.date = new Date(date);
+            const startDate = new Date(date);
+            startDate.setUTCHours(0, 0, 0, 0);
+            const endDate = new Date(startDate);
+            endDate.setUTCDate(startDate.getUTCDate() + 1);
+            filters.date = {
+                gte: startDate,
+                lt: endDate,
+            };
         }
         if (departureLocation) {
             filters.departureLocation = { contains: departureLocation, mode: 'insensitive' };
@@ -216,6 +243,7 @@ app.post("/api/user/searchFlight", async (req, res) => {
         res.status(500).json({ error: "Failed to search flights" });
     }
 });
+
 
 app.post("/api/user/bookFlight", async (req, res) => {
     const { flightId, seats } = req.body;
