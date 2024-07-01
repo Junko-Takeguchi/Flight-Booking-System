@@ -1,13 +1,53 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { format } from 'date-fns';
+import axios from 'axios';
+import userContext from '../context/user/userContext.js';
+import flightContext from '../context/flight/flightContext.js';
 
 const FlightCard = ({
+    flightId,
     departureLocation,
     arrivalLocation,
     date,
     name
 }) => {
     const formattedDate = format(new Date(date), 'EEE, MMM d, h:mma');
+    const { user } = useContext(userContext);
+
+    const handleBook = async () => {
+        if (!user) {
+            alert("Please log in to book a flight");
+            return;
+        }
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            alert("Please log in to book a flight");
+            return;
+        }
+        console.log({
+            flightId,
+            seats: 1 // assuming 1 seat is being booked
+        })
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/bookFlight`, {
+                flightId,
+                seats: 1 // assuming 1 seat is being booked
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 201) {
+                alert("Flight booked successfully!");
+            } else {
+                alert("Failed to book flight");
+            }
+        } catch (error) {
+            console.error("Failed to book flight", error);
+            alert(error.response.data.error || "Failed to book flight");
+        }
+    };
 
     return (
         <div className="flex flex-col w-full rounded-xl bg-pink border-2 border-black">
@@ -15,7 +55,10 @@ const FlightCard = ({
                 <div>
                     <span className="text-title">{name} </span>
                 </div>
-                <button className="bg-black items-center text-white flex gap-2 rounded-xl hover:bg-pink hover:text-black transition border border-black px-4 py-2">
+                <button
+                    className="bg-black items-center text-white flex gap-2 rounded-xl hover:bg-pink hover:text-black transition border border-black px-4 py-2"
+                    onClick={handleBook}
+                >
                     <span>Book</span>
                 </button>
             </div>

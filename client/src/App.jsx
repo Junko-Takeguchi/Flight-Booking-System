@@ -6,6 +6,7 @@ import axios from "axios";
 import BrowseFlights from "./pages/BrowseFlights.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import Bookings from "./pages/Bookings.jsx";
 
 function App() {
     const {setFlights} = useContext(flightContext);
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/flights" element={<BrowseFlights/>}/>
+                <Route path="/bookings" element={<Bookings/>}/>
             </Routes>
         </BrowserRouter>
     )

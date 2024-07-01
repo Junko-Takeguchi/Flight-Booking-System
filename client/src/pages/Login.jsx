@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import userContext from "../context/user/userContext.js";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const {setUser} = useContext(userContext);
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -16,8 +18,12 @@ const Login = () => {
             });
             // console.log(response.data)
             if (response.status === 200) {
-                const { token } = response.data;
+                const { token, id, email } = response.data;
                 localStorage.setItem('userToken', token);
+                setUser({
+                    email,
+                    id
+                });
                 navigate("/");
             } else {
                 console.error('Login error:', response.data.error);

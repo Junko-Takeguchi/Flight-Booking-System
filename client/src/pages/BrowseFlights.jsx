@@ -15,6 +15,7 @@ const BrowseFlights = () => {
         const arrivalLocation = searchParams.get("arrivalLocation");
         const passengers = searchParams.get("passengers");
         const date = searchParams.get("date");
+        const name = searchParams.get("name");
         const token = localStorage.getItem("userToken");
 
         if (!token) {
@@ -25,6 +26,7 @@ const BrowseFlights = () => {
                 arrivalLocation,
                 date,
                 passengers,
+                name
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,6 +53,7 @@ const BrowseFlights = () => {
             {flights && flights.map((flight) => (
                 <FlightCard
                     key={flight.id}
+                    flightId={flight.id}
                     departureLocation={flight.departureLocation}
                     arrivalLocation={flight.arrivalLocation}
                     name={flight.name}
