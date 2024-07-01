@@ -1,0 +1,245 @@
+{
+  "info": {
+    "_postman_id": "370fd6d9-11b2-42d1-9ab7-8ac3fe18ca41",
+    "name": "Flight Bookings Server",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "26813600",
+    "_collection_link": "https://www.postman.com/material-pilot-22276634/workspace/flight-bookings-server/collection/26813600-370fd6d9-11b2-42d1-9ab7-8ac3fe18ca41?action=share&source=collection_link&creator=26813600"
+  },
+  "item": [
+    {
+      "name": "admin routes",
+      "item": [
+        {
+          "name": "admin login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"akshit@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/admin/login"
+          },
+          "response": []
+        },
+        {
+          "name": "add flight",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjdmZDRlZTBiMzkxZmUwNDc5ZmVjODYiLCJlbWFpbCI6ImFrc2hpdEBnbWFpbC5jb20iLCJpYXQiOjE3MTk2NjI3NDh9.MzrNh5syR0sAvlWA1KNl7RU-_HAHuWG75J336YOJSlc",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\r\n    \"flightNumber\": \"VIS111\",\r\n    \"name\": \"Vistara\",\r\n    \"departureLocation\": \"Delhi\",\r\n    \"arrivalLocation\" : \"London\",\r\n    \"date\": \"2024-07-01T09:30:00.000Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/admin/addFlight"
+          },
+          "response": []
+        },
+        {
+          "name": "view bookings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjdmZDRlZTBiMzkxZmUwNDc5ZmVjODYiLCJlbWFpbCI6ImFrc2hpdEBnbWFpbC5jb20iLCJpYXQiOjE3MTk2NjI3NDh9.MzrNh5syR0sAvlWA1KNl7RU-_HAHuWG75J336YOJSlc",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"flightName\": \"indigo\"\r\n}\r\n//you can also add the parameters like flightName, flightId and date",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/admin/viewBookings"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user routes",
+      "item": [
+        {
+          "name": "register new user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"testuser@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/user/register"
+          },
+          "response": []
+        },
+        {
+          "name": "user login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjdmZWU4MjAyY2YwMTVkNDcwZDU3OTEiLCJlbWFpbCI6InRlc3R1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTcxOTY2MDE2MiwiZXhwIjoxNzE5NjYzNzYyfQ.0a0Xy4tRQbnFVZYRCS6IMeHhhrocm4Of0pbqImKwd14",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"testuser@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/user/login"
+          },
+          "response": []
+        },
+        {
+          "name": "search flights",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjdmZWU4MjAyY2YwMTVkNDcwZDU3OTEiLCJlbWFpbCI6InRlc3R1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTcxOTY2MjkyMH0.SB3ElDet_EId2T3O5U8SxE7m5yeJ7P_Gtx0UKZoRJIw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"departureLocation\" : \"kochi\",\r\n    \"arrivalLocation\": \"delhi\"\r\n}\r\n// you can search by flightNumber, name, date, departureLocation, arrivalLocation",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/user/searchFlight"
+          },
+          "response": []
+        },
+        {
+          "name": "book flight",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjdmZWU4MjAyY2YwMTVkNDcwZDU3OTEiLCJlbWFpbCI6InRlc3R1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTcxOTY2MjkyMH0.SB3ElDet_EId2T3O5U8SxE7m5yeJ7P_Gtx0UKZoRJIw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"flightId\": \"667fe5276d817850660846a6\",\r\n    \"seats\" : \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/user/bookFlight"
+          },
+          "response": []
+        },
+        {
+          "name": "get all flights",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/api/getAllFlights"
+          },
+          "response": []
+        },
+        {
+          "name": "Get user's bookings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjgxNzVjOGJkMTNkMmJhMzg2N2RjNTgiLCJlbWFpbCI6ImFrc2hpdCIsImlhdCI6MTcxOTg0MjM5OH0.si2Q8aaQCrXiQCWz4WHx1lRap1hfhMTvMmwSX5MCPfg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": \"6682ae283e34536d4ef69eb8\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/user/getBookings"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "jwt",
+    "jwt": {
+      "algorithm": "HS256",
+      "isSecretBase64Encoded": false,
+      "payload": "{}",
+      "addTokenTo": "header",
+      "headerPrefix": "Bearer",
+      "queryParamKey": "token",
+      "header": "{}"
+    }
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
